@@ -81,11 +81,36 @@ void NhaCungCap::timKiemNCC(){
 }
 
 void NhaCungCap::hienThi(const int &i){
-    cout << "| " << i + 1;
+    cout << "| " << i+1;
     int dem = 0;
-    while(1) {
-        if(dem < 7-to)
+    while(1){
+        if(dem < 6 - to_string(i+1).length()){
+            cout << " ";
+            dem++;
+        }
+        else break;
     }
+    cout << "| " << listNCC[i].tenNCC;
+    for(int j = 0; j < 30 - listNCC[i].tenNCC.length(); j++){
+        cout << " ";
+    }
+    cout << "| " << listNCC[i].tenSpNhap;
+    for(int j = 0; j < 30 - listNCC[i].tenSpNhap.length(); j++){
+        cout << " ";
+    }
+    for(int j = 0; j < 12 - to_string(listNCC[i].soLuong).length(); j++){
+        cout << " ";
+    }
+    cout << listNCC[i].soLuong;
+    for(int j = 0; j < 15 - to_string(listNCC[i].giaSanPham).length(); j++){
+        cout << " ";
+    }
+    cout << listNCC[i].giaSanPham;
+    cout << "       | " << listNCC[i].soDienThoai;
+    for(int j = 0; j < 45 - listNCC[i].soDienThoai.length(); j++){
+        cout << " ";
+    }
+    cout << "|" << endl;
 }
 
 void NhaCungCap::hienThiListNCC(){
@@ -98,11 +123,11 @@ void NhaCungCap::hienThiListNCC(){
 void NhaCungCap::luuNCC(){
     ofstream file("NhaCungCap.txt");
     for(int i = 0; i < listNCC.size(); i++){
-        file << listNCC[i].tenNCC << endl;
-        file << listNCC[i].tenSpNhap << endl;
-        file << listNCC[i].soLuong << endl;
-        file << listNCC[i].giaSanPham << endl;
-        file << listNCC[i].soDienThoai << endl;
+        file << listNCC[i].tenNCC << ";";
+        file << listNCC[i].tenSpNhap << ";";
+        file << listNCC[i].soLuong << ";";
+        file << listNCC[i].giaSanPham << ";";
+        file << listNCC[i].soDienThoai << endl;";
     }
     cout << "Luu thanh cong" << endl;
     file.close();
@@ -114,10 +139,10 @@ void NhaCungCap::docNCC(){
     double giaSanPham;
     int soLuong;
     while(!file.eof()){
-        getline(file, tenNCC);
-        getline(file, tenSpNhap);
-        file >> soLuong;
-        file >> giaSanPham;
+        getline(file, tenNCC, '; ');
+        getline(file, tenSpNhap, '; ');
+        file >> soLuong,'; ';
+        file >> giaSanPham, '; ';
         file.ignore();
         getline(file, soDienThoai);
         if(tenNCC != ""){
